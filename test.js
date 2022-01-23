@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const toReadable = require('./src');
+const toReadable = require('./src/index');
 
 
 it('Should return \'zero\' when 0 given', () => {
@@ -189,7 +189,7 @@ it('Should return \'thirty\' when 30 given', () => {
 
   assert.equal(readable, 'thirty');
 });
-/*
+
 it('Should return \'thirty one\' when 31 given', () => {
   const readable = toReadable(31);
 
@@ -6003,4 +6003,3 @@ it('Should return \'nine hundred ninety nine\' when 999 given', () => {
 
   assert.equal(readable, 'nine hundred ninety nine');
 });
-*/

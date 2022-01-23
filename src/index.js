@@ -1,28 +1,57 @@
-var th = ['hundred','thousand','million', 'billion','trillion'];
-var dg = ['zero','one','two','three','four', 'five','six','seven','eight','nine'];
-var tn = ['ten','eleven','twelve','thirteen', 'fourteen','fifteen','sixteen', 'seventeen','eighteen','nineteen'];
-var tw = ['twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
-
-function getLastDigitFromNumber(number){ 
-    const numberText = number.toString(); 
-    const lastDigit = Number(numberText[numberText.length - 1]) 
-    return lastDigit
-}
-function getThirdDigitFromNumber(number){
-    const numberText = number.toString(); 
-    const thirdDigit = Number(numberText[numberText.length - 1]) 
-    return thirdDigit
-}
-
-module.exports = function toReadable (number) {
-    if (number < 10){
-        const lastDigit = getLastDigitFromNumber(number)
-        const lastDigitName = dg[lastDigit]
-        return lastDigitName
+module.exports = function toReadable(number) {
+    const ones = [
+      "",
+      "one",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "eight",
+      "nine",
+      "ten",
+      "eleven",
+      "twelve",
+      "thirteen",
+      "fourteen",
+      "fifteen",
+      "sixteen",
+      "seventeen",
+      "eighteen",
+      "nineteen",
+    ];
+    const tens = [
+      "",
+      "",
+      "twenty",
+      "thirty",
+      "forty",
+      "fifty",
+      "sixty",
+      "seventy",
+      "eighty",
+      "ninety",
+    ];
+    let answ = 0;
+    let dozens = 0;
+    if(number === 0){
+      return 'zero';
     }
-    else if (10 < number < 20){
-        const thirdDigit = getThirdDigitFromNumber(number) 
-        const thirdDigitName = tn[thirdDigit]
-        return thirdDigitName
+    if(number < 20){
+      return ones[number];
     }
-}
+    if(number < 100){
+      answ = Math.floor(number/10);
+      return (tens[answ] + " " + ones[number % 10]).trim();
+    }
+    answ = Math.floor(number / 100);
+    dozens = Math.floor(number % 100);
+    if(dozens >= 20){
+      return (ones[answ] + ' hundred ' + tens[Math.floor(dozens/10)] + " " + ones[dozens % 10]).trim();
+    }
+    else{
+      return (ones[answ] + ' hundred ' + ones[dozens]).trim();
+    }
+    
+  };
